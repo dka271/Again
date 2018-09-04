@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
+
 [ExecuteInEditMode]
 public class ObjectiveControls : MonoBehaviour {
 
@@ -21,9 +23,9 @@ public class ObjectiveControls : MonoBehaviour {
 
 		if(GUI.Button(new Rect (center.offset.x + buttonMenuLocation.x, center.offset.y + buttonMenuLocation.y, 140, 50), "BEGIN!"))
 		{
-			GameManager.currentLevel = 1;
-			Application.LoadLevel("Level 1");
-		}
+			//GameManager.currentLevel = 1;
+            SceneManager.LoadScene("LevelSelectMenu");
+        }
 
 	}
 }
