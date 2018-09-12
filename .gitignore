@@ -1,3 +1,4 @@
 src/Prototype/Temp/UnityTempFile*
 src/Prototype/Library/metadata/*
 src/Prototype/Library/ShaderCache/*
+*.meta

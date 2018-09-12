@@ -53,7 +53,7 @@ public class LevelManager : MonoBehaviour {
              if (PlayerPrefs.GetInt("Level " + button.LevelText.text + "_completed") == 1) {
                 button.Star1.SetActive(true);
              }
-             if (PlayerPrefs.GetInt("Level " + button.LevelText.text + "_timegoal") != 0 && PlayerPrefs.GetInt("Level " + button.LevelText.text + "_timegoal") < 10) {
+             if (PlayerPrefs.GetFloat("Level " + button.LevelText.text + "_timegoal") != 0 && PlayerPrefs.GetFloat("Level " + button.LevelText.text + "_timegoal") < 10) {
                 button.Star2.SetActive(true);
              }
              if (PlayerPrefs.GetInt("Level " + button.LevelText.text + "_deathless") == 1) {

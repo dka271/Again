@@ -14,7 +14,7 @@ public class GameManager : MonoBehaviour {
 	public static int levelCount = 10;
     private static int currNumDeathsThisLevel = 0;
     private static long timeToCompleteCurrLevel = 999999;
-    private double Timer = 0.0;
+    private TimerScript timer;
 
     private bool loading;
 
@@ -26,7 +26,8 @@ public class GameManager : MonoBehaviour {
 		}
 
 		SpawnPlayer(checkpoint);
-	}
+        timer = GameObject.Find("TimerText").GetComponent<TimerScript>();
+    }
 	
 	// Spawn player
 	private void SpawnPlayer(Vector3 spawnPos) {
@@ -35,9 +36,7 @@ public class GameManager : MonoBehaviour {
 	}
 
 	private void Update() {
-        Timer += Time.deltaTime; //Time.deltaTime will increase the value with 1 every second.
-        //This will show the timer on screen
-        // guiText.text = "" + Timer;
+        
         if (!currentPlayer) {
 			if (Input.GetButtonDown("Respawn")) {
                 currNumDeathsThisLevel++;
@@ -60,7 +59,7 @@ public class GameManager : MonoBehaviour {
 		checkpoint = cp;
 	}
 
-	public void EndLevel() {
+    public void EndLevel() {
 
         if (currentLevel < levelCount && !loading) {
 			loading = true;
@@ -70,9 +69,11 @@ public class GameManager : MonoBehaviour {
             Console.Write("thingy: " + PlayerPrefs.GetInt("Level " + (currentLevel + 1)));
 
             //Sets the fastest completion time
-            if (PlayerPrefs.GetInt("Level " + currentLevel + "_timegoal") != 0 && PlayerPrefs.GetInt("Level " + currentLevel + "_timegoal") > Timer)
+            Debug.Log("first" + PlayerPrefs.GetFloat("Level " + currentLevel + "_timegoal"));
+            Debug.Log("second" + timer.currentTimeInLevel);
+            if (PlayerPrefs.GetFloat("Level " + currentLevel + "_timegoal") == 0 || PlayerPrefs.GetFloat("Level " + currentLevel + "_timegoal") > timer.currentTimeInLevel)
             {
-                PlayerPrefs.SetInt("Level " + currentLevel + "_timegoal", Convert.ToInt32(Timer));
+                PlayerPrefs.SetFloat("Level " + currentLevel + "_timegoal", timer.currentTimeInLevel);
             }
 
             //Sets whether or not this level was completed
